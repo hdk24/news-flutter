@@ -19,7 +19,7 @@
 ## Reference
 * [rrifafauzikomara/MovieCatalogue](https://github.com/rrifafauzikomara/MovieCatalogue/)
 * [kuwali/random_quote](https://github.com/kuwali/random_quote/tree/master/lib)
-* [Dio Interceptor] (https://medium.com/flutter-community/dio-interceptors-in-flutter-17be4214f363)
+* [flutter-community/dio-interceptor](https://medium.com/flutter-community/dio-interceptors-in-flutter-17be4214f363)
 
 ## License
 
