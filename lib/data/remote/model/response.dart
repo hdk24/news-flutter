@@ -18,4 +18,9 @@ class BaseResponse extends Equatable {
   factory BaseResponse.fromJson(Map<String, dynamic> json) => _$BaseResponseFromJson(json);
   Map<String, dynamic> toJson() => _$BaseResponseToJson(this);
 
+  @override
+  String toString() {
+    return 'BaseResponse{status: $status, totalResults: $totalResults, articles: $articles}';
+  }
+
 }

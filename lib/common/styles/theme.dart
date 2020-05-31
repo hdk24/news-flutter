@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsflutter/common/styles/styles.dart';
+import 'package:newsflutter/ui/main.dart';
 
 class AppTheme {
 
@@ -43,4 +44,9 @@ class AppTheme {
     ),
   );
 
+  static TextStyle titleBarStyle = TextStyle(
+    color: isDark? ColorPalettes.darkTextPrimary : ColorPalettes.lightTextPrimary,
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+  );
 }

@@ -1,4 +1,4 @@
 class AppConstant {
-  static String appName = "NewsId";
+  static String appName = "News.Id";
   static String appNameDev = "NewsId Dev";
 }

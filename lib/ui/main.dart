@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsflutter/common/common.dart';
+import 'package:newsflutter/data/data.dart';
 import 'package:newsflutter/utils/utils.dart';
 
 import 'home/home_screen.dart';
 
+const bool isDark = false;
+
 void main() async {
+  BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(MyApp());
 }
 
@@ -15,7 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isDark = false;
 
   @override
   void initState() {

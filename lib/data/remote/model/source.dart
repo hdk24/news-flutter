@@ -15,4 +15,9 @@ class Source extends Equatable{
 
   factory Source.fromJson(Map<String, dynamic> json) => _$SourceFromJson(json);
   Map<String, dynamic> toJson() => _$SourceToJson(this);
+
+  @override
+  String toString() {
+    return 'Source{id: $id, name: $name}';
+  }
 }
