@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newsflutter/common/styles/styles.dart';
 import 'package:newsflutter/data/data.dart';
 import 'package:newsflutter/ui/main.dart';
+import 'package:newsflutter/utils/utils.dart';
 
 class NewsItem extends StatelessWidget {
   final Articles articles;
@@ -38,7 +39,7 @@ class NewsItem extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  articles.source.name,
+                  articles.source.name +"  •  " +AppUtils.toTimeAgo(articles.publishedAt),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -64,7 +65,7 @@ class NewsItem extends StatelessWidget {
               image: DecorationImage(
                 image: NetworkImage(articles.urlToImage),
                 fit: BoxFit.cover,
-                colorFilter: ColorPalettes.grayscaleFilter,
+                //colorFilter: ColorPalettes.grayscaleFilter,
               ),
             ),
           )

@@ -6,8 +6,13 @@ part 'response.g.dart';
 
 @JsonSerializable()
 class BaseResponse extends Equatable {
+  @JsonKey(name: "status")
   final String status;
+
+  @JsonKey(name: "totalResults")
   final int totalResults;
+
+  @JsonKey(name: "articles")
   final List<Articles> articles;
 
   const BaseResponse([this.status, this.totalResults, this.articles = const []]);

@@ -6,12 +6,25 @@ part 'articles.g.dart';
 
 @JsonSerializable()
 class Articles extends Equatable {
+  @JsonKey(name: "source")
   final Source source;
+
+  @JsonKey(name: "title")
   final String title;
+
+  @JsonKey(name: "description")
   final String description;
+
+  @JsonKey(name: "url")
   final String url;
+
+  @JsonKey(name: "urlToImage")
   final String urlToImage;
+
+  @JsonKey(name: "publishedAt")
   final DateTime publishedAt;
+
+  @JsonKey(name: "content")
   final String content;
 
   const Articles(this.source, this.title, this.description, this.url, this.urlToImage,

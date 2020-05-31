@@ -48,13 +48,20 @@ class TopNews extends StatelessWidget {
                   ),
               ),
               SizedBox(height: 16.0),
-              Text(source,
-                style: TextStyle(
-                  color: ColorPalettes.red,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w700,
+              Container(
+                padding: const EdgeInsets.all(4.0),
+                decoration: BoxDecoration(
+                    border: Border.all(color: ColorPalettes.red)
+                ),
+                child: Text(source,
+                  style: TextStyle(
+                    color: ColorPalettes.red,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
+
             ],
           ),
         )

@@ -25,6 +25,9 @@ dependencies:
   cached_network_image: ^2.2.0
   flutter_launcher_icons: ^0.7.5
 
+  # utility
+  timeago: ^2.0.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

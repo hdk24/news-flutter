@@ -5,8 +5,6 @@ import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
 
-// https://medium.com/flutter-community/dio-interceptors-in-flutter-17be4214f363
-// https://medium.com/@IhwanID/implementasi-flutter-dengan-bloc-dio-logging-interceptor-bf63ba2a8114
 @RestApi(baseUrl: ApiConfig.baseUrl)
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
