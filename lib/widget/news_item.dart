@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newsflutter/common/styles/styles.dart';
 import 'package:newsflutter/data/data.dart';
@@ -11,8 +12,6 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
 
     return Container(
       padding: EdgeInsets.all(16),
@@ -59,14 +58,21 @@ class NewsItem extends StatelessWidget {
           Container(
             width: 140,
             height: 78.75,
-            decoration: BoxDecoration(
-              color: ColorPalettes.grey,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              image: DecorationImage(
-                image: NetworkImage(articles.urlToImage),
-                fit: BoxFit.cover,
-                //colorFilter: ColorPalettes.grayscaleFilter,
+            child: CachedNetworkImage(
+              imageUrl: articles.urlToImage,
+              imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    color: ColorPalettes.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  )
               ),
+              placeholder: (context, url) => Container(color: ColorPalettes.grey),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           )
         ],

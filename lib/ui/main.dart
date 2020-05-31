@@ -7,7 +7,7 @@ import 'package:newsflutter/utils/utils.dart';
 
 import 'home/home_screen.dart';
 
-const bool isDark = false;
+const bool isDark = true;
 
 void main() async {
   BlocSupervisor.delegate = SimpleBlocDelegate();

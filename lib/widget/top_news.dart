@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newsflutter/common/styles/styles.dart';
 
@@ -16,14 +17,21 @@ class TopNews extends StatelessWidget {
       children: <Widget>[
         Container(
           height: 225,
-          decoration: BoxDecoration(
-            color: ColorPalettes.grey,
-            shape: BoxShape.rectangle,
-            image: DecorationImage(
-              image: NetworkImage(poster),
-              fit: BoxFit.cover,
-              colorFilter: ColorPalettes.grayscaleFilter,
+          child: CachedNetworkImage(
+            imageUrl: poster,
+            imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  color: ColorPalettes.grey,
+                  shape: BoxShape.rectangle,
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                    colorFilter: ColorPalettes.grayscaleFilter,
+                  ),
+                )
             ),
+            placeholder: (context, url) => Container(color: ColorPalettes.grey),
+            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),
         Container(

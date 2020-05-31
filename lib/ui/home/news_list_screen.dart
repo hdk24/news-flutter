@@ -21,21 +21,25 @@ class _NewsListScreenState extends State<NewsListScreen> {
     return BlocBuilder<NewsBloc, NewsState>(
       builder: (context, state) {
         if (state is NewsLoaded) {
-          return ListView.builder(
-            itemCount: state.response.articles.length,
-            itemBuilder: (context, index) {
-              Articles _articles = state.response.articles[index];
-              if (index == 0) {
-                return TopNews(
-                  poster: _articles.urlToImage,
-                  title: _articles.title,
-                  source: _articles.source.name);
+          if(state.response.totalResults >0){
+            return ListView.builder(
+              itemCount: state.response.articles.length,
+              itemBuilder: (context, index) {
+                Articles _articles = state.response.articles[index];
+                if (index == 0) {
+                  return TopNews(
+                      poster: _articles.urlToImage,
+                      title: _articles.title,
+                      source: _articles.source.name);
 
-              } else {
-                return NewsItem(_articles);
-              }
-            },
-          );
+                } else {
+                  return NewsItem(_articles);
+                }
+              },
+            );
+          } else {
+            return Center(child: Text("No Result."));
+          }
         } else if (state is NewsLoading) {
           return Center(child: Text("Loading.. "));
         } else if (state is NewsError) {
