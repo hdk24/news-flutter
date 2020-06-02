@@ -5,15 +5,25 @@ import 'package:newsflutter/data/data.dart';
 import 'package:newsflutter/widget/widget.dart';
 
 class NewsListScreen extends StatefulWidget {
+
+  final String category;
+
+  const NewsListScreen({Key key, this.category}) : super(key: key);
+
   @override
-  _NewsListScreenState createState() => _NewsListScreenState();
+  NewsListScreenState createState() => NewsListScreenState();
 }
 
-class _NewsListScreenState extends State<NewsListScreen> {
+class NewsListScreenState extends State<NewsListScreen> {
+
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<NewsBloc>(context).add(LoadTopHeadlines());
+    updateState(widget.category);
+  }
+
+  void updateState(String category){
+    BlocProvider.of<NewsBloc>(context).add(LoadTopHeadlines(category));
   }
 
   @override

@@ -13,4 +13,12 @@ class Navigation {
         arguments: argumentClass
     );
   }
+
+  static intentReplaceWithData(BuildContext context, String nameRouted, Object argumentClass) {
+    Navigator.pushReplacementNamed(
+        context,
+        nameRouted,
+        arguments: argumentClass
+    );
+  }
 }

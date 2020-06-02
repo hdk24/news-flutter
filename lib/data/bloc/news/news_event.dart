@@ -7,4 +7,13 @@ abstract class NewsEvent extends Equatable{
   List<Object> get props => [];
 }
 
-class LoadTopHeadlines extends NewsEvent {}
+class LoadTopHeadlines extends NewsEvent {
+  final String category;
+
+  const LoadTopHeadlines(this.category);
+
+  @override
+  List<Object> get props => [
+    category
+  ];
+}

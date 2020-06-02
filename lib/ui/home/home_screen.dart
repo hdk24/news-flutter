@@ -3,18 +3,64 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsflutter/common/styles/styles.dart';
 import 'package:newsflutter/data/data.dart';
 import 'package:newsflutter/ui/home/news_list_screen.dart';
+import 'package:newsflutter/utils/app_constant.dart';
 
-class HomePage extends StatefulWidget {
-  static const routeName = '/';
+// https://github.com/pedromassango/bottom_navy_bar
+class ScreenArguments {
   final String title;
 
-  const HomePage({Key key, this.title}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
+  ScreenArguments(this.title);
 }
 
-class _HomePageState extends State<HomePage> {
+class HomeScreen extends StatefulWidget {
+
+  static const routeName = '/home';
+  final String title;
+
+  const HomeScreen({Key key, this.title}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  // initial key
+  final GlobalKey<NewsListScreenState> _key =  GlobalKey<NewsListScreenState>();
+
+  TabController _tabController;
+  int _currentIndex = 0;
+
+  List<Tab> _tabList() {
+    List<Tab> tab = <Tab>[];
+    for (int i = 0; i < AppConstant.categoryList().length; i++) {
+      tab.add(Tab(text: AppConstant.categoryList()[i]));
+    }
+    return tab;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(vsync: this, length: _tabList().length);
+    _tabController.addListener(_handleTabSelection);
+  }
+
+  _handleTabSelection() {
+    setState(() {
+      _currentIndex = _tabController.index;
+      // call method eith key
+      _key.currentState.updateState(AppConstant.categoryList()[_currentIndex]);
+      print("Hdk tab select ${AppConstant.categoryList()[_currentIndex]}");
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +69,33 @@ class _HomePageState extends State<HomePage> {
           widget.title,
           style: AppTheme.titleBarStyle,
         ),
+        bottom: new TabBar(
+          isScrollable: true,
+          labelColor: ColorPalettes.red,
+          unselectedLabelColor: ColorPalettes.lightTextSecondary,
+          indicatorColor: Colors.transparent,
+          controller: _tabController,
+          labelStyle: TextStyle(
+            fontSize: 14.0,
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.bold,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontSize: 14.0,
+            fontFamily: 'Family Name',
+            fontWeight: FontWeight.w600,
+          ),
+          tabs: _tabList(),
+        ),
         centerTitle: true,
         elevation: 1.0,
       ),
       body: BlocProvider(
         create: (context) => NewsBloc(NewsRepositoryImpl()),
-        child: NewsListScreen(),
+        child: NewsListScreen(
+          key: _key,
+          category: AppConstant.categoryList()[_currentIndex],
+        ),
       ),
     );
   }

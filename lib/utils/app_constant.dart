@@ -1,4 +1,14 @@
 class AppConstant {
-  static String appName = "News.Id";
-  static String appNameDev = "NewsId Dev";
+
+   static List<String> categoryList(){
+    List<String> category = [];
+    category.add("General");
+    category.add("Business");
+    category.add("Entertainment");
+    category.add("Health");
+    category.add("Science");
+    category.add("Sports");
+    category.add("Technology");
+    return category;
+  }
 }

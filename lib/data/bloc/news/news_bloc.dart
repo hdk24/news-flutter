@@ -14,14 +14,14 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   @override
   Stream<NewsState> mapEventToState(NewsEvent event) async* {
     if (event is LoadTopHeadlines) {
-      yield* _mapLoadTopHeadlinesToState();
+      yield* _mapLoadTopHeadlinesToState(event.category);
     }
   }
 
-  Stream<NewsState> _mapLoadTopHeadlinesToState() async* {
+  Stream<NewsState> _mapLoadTopHeadlinesToState(String category) async* {
     try {
       yield NewsLoading();
-      var newsResponse = await repository.getTopHeadline();
+      var newsResponse = await repository.getTopHeadline(category);
       yield NewsLoaded(newsResponse);
     } catch (e) {
       yield NewsError(e.toString());

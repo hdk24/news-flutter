@@ -13,6 +13,13 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final _placeHolder = Container(
+        decoration: new BoxDecoration(
+            color: ColorPalettes.grey,
+            borderRadius: new BorderRadius.all(Radius.circular(8)),
+        ),
+    );
+
     return Container(
       padding: EdgeInsets.all(16),
       child: Row(
@@ -71,8 +78,8 @@ class NewsItem extends StatelessWidget {
                     ),
                   )
               ),
-              placeholder: (context, url) => Container(color: ColorPalettes.grey),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              placeholder: (context, url) => _placeHolder,
+              errorWidget: (context, url, error) => _placeHolder,
             ),
           )
         ],

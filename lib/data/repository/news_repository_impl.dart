@@ -4,8 +4,7 @@ import 'package:newsflutter/data/remote/api/dio_config.dart';
 import 'package:newsflutter/data/remote/model/response.dart';
 import 'package:newsflutter/data/repository/news_repository.dart';
 
-class NewsRepositoryImpl implements NewsRepository{
-
+class NewsRepositoryImpl implements NewsRepository {
   ApiService _service;
 
   NewsRepositoryImpl() {
@@ -13,8 +12,8 @@ class NewsRepositoryImpl implements NewsRepository{
   }
 
   @override
-  Future<BaseResponse> getTopHeadline([String apiKey = ApiConfig.apiKey, String country = ApiConfig.country]) {
-    return _service.getTopHeadlines(apiKey, country, "",20,1);
+  Future<BaseResponse> getTopHeadline(String category) {
+    return _service.getTopHeadlines(
+        ApiConfig.apiKey, ApiConfig.country, category, 20, 1);
   }
-
 }
