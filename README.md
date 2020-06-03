@@ -12,6 +12,7 @@
 * Equatable
 * Retrofit
 * Json Serializable
+* Shimmer
 
 ## Author
 **Hanantadk**

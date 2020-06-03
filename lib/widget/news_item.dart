@@ -66,7 +66,7 @@ class NewsItem extends StatelessWidget {
             width: 140,
             height: 78.75,
             child: CachedNetworkImage(
-              imageUrl: articles.urlToImage,
+              imageUrl: articles.urlToImage == null? AppConstant.errorImage : articles.urlToImage,
               imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     color: ColorPalettes.grey,

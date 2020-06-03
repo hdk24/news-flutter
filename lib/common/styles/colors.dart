@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:newsflutter/ui/main.dart';
 
 class ColorPalettes{
   // Colors for light Theme
@@ -22,6 +23,9 @@ class ColorPalettes{
   static Color red = Color(0xffCE281C);
   static Color yellow = Colors.yellow;
   static Color green = Colors.green;
+
+  static Color shimmerColor = isDark? Color(0xff4d4e4f) : Color(0xffd2d3d4);
+  static Color shimmerGradient = isDark? Color(0xff6d6d6e) : Color(0xffe6e7e8);
 
   static ColorFilter grayscaleFilter = ColorFilter.mode(
     Colors.grey,
