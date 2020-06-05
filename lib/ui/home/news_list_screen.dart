@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsflutter/data/bloc/bloc.dart';
 import 'package:newsflutter/data/data.dart';
+import 'package:newsflutter/ui/detail/detail_screen.dart';
+import 'package:newsflutter/utils/utils.dart';
 import 'package:newsflutter/widget/widget.dart';
 
 class NewsListScreen extends StatefulWidget {
@@ -36,11 +38,16 @@ class NewsListScreenState extends State<NewsListScreen> {
                 Articles _articles = state.response.articles[index];
                 if (index == 0) {
                   return TopNews(
-                      poster: _articles.urlToImage,
-                      title: _articles.title,
-                      source: _articles.source.name);
+                    poster: _articles.urlToImage,
+                    title: _articles.title,
+                    source: _articles.source.name,
+                    onTap: () {
+                      _goToDetailScreen(context, _articles);
+                    },);
                 } else {
-                  return NewsItem(_articles);
+                  return NewsItem(articles: _articles, onTap: () {
+                    _goToDetailScreen(context, _articles);
+                  });
                 }
               },
             );
@@ -55,6 +62,14 @@ class NewsListScreenState extends State<NewsListScreen> {
           return Center(child: Text(""));
         }
       },
+    );
+  }
+
+  void _goToDetailScreen(BuildContext context, Articles articles) {
+    Navigation.intentWithData(
+      context,
+      DetailScreen.routeName,
+      ScreenArguments(articles),
     );
   }
 }

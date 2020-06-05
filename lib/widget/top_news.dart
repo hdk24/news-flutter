@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newsflutter/common/styles/styles.dart';
+import 'package:newsflutter/utils/app_constant.dart';
 
 class TopNews extends StatelessWidget {
   final String poster;
@@ -13,67 +14,70 @@ class TopNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          height: 225,
-          child: CachedNetworkImage(
-            imageUrl: poster,
-            imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  color: ColorPalettes.grey,
-                  shape: BoxShape.rectangle,
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                    colorFilter: ColorPalettes.grayscaleFilter,
-                  ),
-                )
+    return InkWell(
+      onTap: onTap,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            height: 225,
+            child: CachedNetworkImage(
+              imageUrl: poster==null? AppConstant.errorImage : poster,
+              imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    color: ColorPalettes.grey,
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                      colorFilter: ColorPalettes.grayscaleFilter,
+                    ),
+                  )
+              ),
+              placeholder: (context, url) => Container(color: ColorPalettes.grey),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
-            placeholder: (context, url) => Container(color: ColorPalettes.grey),
-            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
-        ),
-        Container(
-          height: 225,
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle, color: Colors.black.withOpacity(0.5)),
-        ),
-        Positioned(
-          bottom: 24.0,
-          left: 16.0,
-          right: 16.0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(title,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: ColorPalettes.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-              ),
-              SizedBox(height: 16.0),
-              Container(
-                padding: const EdgeInsets.all(4.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: ColorPalettes.red)
+          Container(
+            height: 225,
+            decoration: BoxDecoration(
+                shape: BoxShape.rectangle, color: Colors.black.withOpacity(0.5)),
+          ),
+          Positioned(
+            bottom: 24.0,
+            left: 16.0,
+            right: 16.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(title,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: ColorPalettes.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                 ),
-                child: Text(source,
-                  style: TextStyle(
-                    color: ColorPalettes.red,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w700,
+                SizedBox(height: 16.0),
+                Container(
+                  padding: const EdgeInsets.all(4.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: ColorPalettes.red)
+                  ),
+                  child: Text(source,
+                    style: TextStyle(
+                      color: ColorPalettes.red,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
-              ),
 
-            ],
-          ),
-        )
-      ],
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

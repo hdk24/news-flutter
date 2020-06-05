@@ -5,7 +5,6 @@ import 'package:newsflutter/data/data.dart';
 import 'package:newsflutter/ui/home/news_list_screen.dart';
 import 'package:newsflutter/utils/app_constant.dart';
 
-// https://github.com/pedromassango/bottom_navy_bar
 class ScreenArguments {
   final String title;
 
@@ -13,7 +12,6 @@ class ScreenArguments {
 }
 
 class HomeScreen extends StatefulWidget {
-
   static const routeName = '/home';
   final String title;
 
@@ -25,8 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  // initial key
-  final GlobalKey<NewsListScreenState> _key =  GlobalKey<NewsListScreenState>();
+  final GlobalKey<NewsListScreenState> _key = GlobalKey<NewsListScreenState>();
 
   TabController _tabController;
   int _currentIndex = 0;
@@ -39,20 +36,19 @@ class _HomeScreenState extends State<HomeScreen>
     return tab;
   }
 
+  _handleTabSelection() {
+    setState(() {
+      _currentIndex = _tabController.index;
+      _key.currentState.updateState(AppConstant.categoryList()[_currentIndex]);
+      print("Hdk tab select ${AppConstant.categoryList()[_currentIndex]}");
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(vsync: this, length: _tabList().length);
     _tabController.addListener(_handleTabSelection);
-  }
-
-  _handleTabSelection() {
-    setState(() {
-      _currentIndex = _tabController.index;
-      // call method eith key
-      _key.currentState.updateState(AppConstant.categoryList()[_currentIndex]);
-      print("Hdk tab select ${AppConstant.categoryList()[_currentIndex]}");
-    });
   }
 
   @override
@@ -63,30 +59,29 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final _tabBarView = TabBar(
+      isScrollable: true,
+      labelColor: ColorPalettes.red,
+      unselectedLabelColor: ColorPalettes.lightTextSecondary,
+      indicatorColor: Colors.transparent,
+      controller: _tabController,
+      labelStyle: TextStyle(
+        fontSize: 14.0,
+        fontFamily: 'Raleway',
+        fontWeight: FontWeight.bold,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 14.0,
+        fontFamily: 'Family Name',
+        fontWeight: FontWeight.w600,
+      ),
+      tabs: _tabList(),
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: AppTheme.titleBarStyle,
-        ),
-        bottom: new TabBar(
-          isScrollable: true,
-          labelColor: ColorPalettes.red,
-          unselectedLabelColor: ColorPalettes.lightTextSecondary,
-          indicatorColor: Colors.transparent,
-          controller: _tabController,
-          labelStyle: TextStyle(
-            fontSize: 14.0,
-            fontFamily: 'Raleway',
-            fontWeight: FontWeight.bold,
-          ),
-          unselectedLabelStyle: TextStyle(
-            fontSize: 14.0,
-            fontFamily: 'Family Name',
-            fontWeight: FontWeight.w600,
-          ),
-          tabs: _tabList(),
-        ),
+        title: Text(widget.title, style: AppTheme.titleBarStyle),
+        bottom: _tabBarView,
         centerTitle: true,
         elevation: 1.0,
       ),
