@@ -8,7 +8,7 @@ import 'package:newsflutter/ui/onboard/splash_screen.dart';
 
 import 'home/home_screen.dart';
 
-const bool isDark = true;
+const bool isDark = false;
 
 void main() async {
   BlocSupervisor.delegate = SimpleBlocDelegate();
