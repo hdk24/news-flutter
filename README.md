@@ -1,4 +1,9 @@
 # News App
+News application with data from [Newsapi.org](https://newsapi.org/) and design inspired by [kate ivanova](https://www.instagram.com/p/B8DFg12A0AT/?igshid=v7dlbq6kzlr6)
+<pre>
+<img src="screenshot/sc_news_splash.jpg" width="250" height="460">     <img src="screenshot/sc_news_loading.jpg" width="250" height="460">     <img src="screenshot/sc_news_home.jpg" width="250" height="460">     <img src="screenshot/sc_news_detail.jpg" width="250" height="460">
+</pre>
+
 
 #### Project Structure:
 1. **common** : It contains all common configuration.
